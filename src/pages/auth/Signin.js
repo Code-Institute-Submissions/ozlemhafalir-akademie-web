@@ -1,23 +1,47 @@
 import React, {useState} from "react";
+import axios from "axios";
 
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useSetCurrentUser} from "../../contexts/CurrentUserContext";
+import {useRedirect} from "../../hooks/useRedirect";
+import {setTokenTimestamp} from "../../utils/utils";
 
 
 function Signin() {
+    const setCurrentUser = useSetCurrentUser();
+    useRedirect("loggedIn");
 
     const [signInData, setSignInData] = useState({
         username: "",
         password: "",
     });
     const {username, password} = signInData;
+
+    const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        try {
+            const {data} = await axios.post("/dj-rest-auth/login/", signInData);
+            console.log(data);
+            console.log('setCurrentUser');
+            console.log(data.user);
+            setCurrentUser(data.user);
+            setTokenTimestamp(data);
+            navigate(-1);
+        } catch (err) {
+            console.log(err)
+            setErrors(err.response?.data || {});
+        }
     };
 
     const handleChange = (event) => {
@@ -44,6 +68,11 @@ function Signin() {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
+                            {errors.username?.map((message, idx) => (
+                                <Alert key={idx} variant="warning">
+                                    {message}
+                                </Alert>
+                            ))}
 
                             <Form.Group controlId="password">
                                 <Form.Label className="d-none">Password</Form.Label>
@@ -55,11 +84,21 @@ function Signin() {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
+                            {errors.password?.map((message, idx) => (
+                                <Alert key={idx} variant="warning">
+                                    {message}
+                                </Alert>
+                            ))}
                             <Button
                                 type="submit"
                             >
                                 Sign in
                             </Button>
+                            {errors.non_field_errors?.map((message, idx) => (
+                                <Alert key={idx} variant="warning" className="mt-3">
+                                    {message}
+                                </Alert>
+                            ))}
                         </Form>
                     </Container>
                     <Container>
