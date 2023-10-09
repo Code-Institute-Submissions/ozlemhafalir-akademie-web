@@ -6,13 +6,14 @@ import {Route, Routes} from "react-router";
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 import Profile from "./pages/account/Profile";
+import Home from "./pages/Home";
 
 function App() {
     return (
         <div className="App">
             <Navigation/>
             <Routes>
-                <Route exact path="/" element={'Homepage'}/>
+                <Route exact path="/" element={<Home />}/>
                 <Route exact path="/signin" element={<Signin />}/>
                 <Route exact path="/signup" element={<Signup />}/>
                 <Route exact path="/profile" element={<Profile />}/>
