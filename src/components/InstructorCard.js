@@ -13,7 +13,7 @@ function InstructorCard({instructor}) {
             }}>
                 <Card.Img variant="top" src={instructor.profile_image}/>
                 <Card.Body>
-                    <Card.Title>{instructor.user}</Card.Title>
+                    <Card.Title>{instructor.title}</Card.Title>
                     <Card.Text>
                         {instructor.bio}
                     </Card.Text>
