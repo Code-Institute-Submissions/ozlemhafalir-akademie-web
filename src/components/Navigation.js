@@ -28,8 +28,8 @@ function Navigation() {
                     <Nav className="me-auto">
                         {currentUser ? (
                             <NavDropdown title="Account" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.2">
-                                    {currentUser.email}
+                                <NavDropdown.Item href="/profile">
+                                    {currentUser.username}
                                 </NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={handleSignOut}>Logout</NavDropdown.Item>

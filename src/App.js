@@ -5,6 +5,7 @@ import React from "react";
 import {Route, Routes} from "react-router";
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
+import Profile from "./pages/account/Profile";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route exact path="/" element={'Homepage'}/>
                 <Route exact path="/signin" element={<Signin />}/>
                 <Route exact path="/signup" element={<Signup />}/>
+                <Route exact path="/profile" element={<Profile />}/>
                 <Route element={() => <p>Page not found!</p>}/>
             </Routes>
         </div>

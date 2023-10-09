@@ -32,14 +32,13 @@ function Signin() {
 
         try {
             const {data} = await axios.post("/dj-rest-auth/login/", signInData);
-            console.log(data);
-            console.log('setCurrentUser');
-            console.log(data.user);
+            console.log('setCurrentUser')
             setCurrentUser(data.user);
+            console.log('setTokenTimestamp')
             setTokenTimestamp(data);
+            console.log('navigate-1')
             navigate(-1);
         } catch (err) {
-            console.log(err)
             setErrors(err.response?.data || {});
         }
     };
