@@ -7,6 +7,8 @@ import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 import Profile from "./pages/account/Profile";
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import Instructors from "./pages/Instructors";
 
 function App() {
     return (
@@ -14,6 +16,8 @@ function App() {
             <Navigation/>
             <Routes>
                 <Route exact path="/" element={<Home />}/>
+                <Route exact path="/categories" element={<Categories/>}/>
+                <Route exact path="/instructors" element={<Instructors/>}/>
                 <Route exact path="/signin" element={<Signin />}/>
                 <Route exact path="/signup" element={<Signup />}/>
                 <Route exact path="/profile" element={<Profile />}/>
